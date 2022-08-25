@@ -69,7 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class Demo extends StatefulWidget {
   RxList<DataClass> list;
-  Demo({Key? key, required this.list}) : super(key: key);
+  bool isDuplicate;
+  Demo({Key? key, required this.list, this.isDuplicate = false})
+      : super(key: key);
 
   @override
   State<Demo> createState() => _DemoState();
