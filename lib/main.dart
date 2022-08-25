@@ -47,7 +47,8 @@ class _MyHomePageState extends State<MyHomePage> {
         floatingActionButton: FloatingActionButton(onPressed: (() {
           print(data.length);
           var mylist = <DataClass>[].obs;
-          if (data[0].page == 0) {
+          if (data[0].page == 1) {
+            Get.to(Demo(list: mylist));
           } else {
             var value = (data[0].page - 1) * 5;
             for (var i = 0; i < value; i++) {
@@ -58,7 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
               mylist.add(element);
             });
 
-            Get.to(Demo(list: mylist));
+            Get.to(Demo(
+              list: mylist,
+              isDuplicate: true,
+            ));
           }
         })),
         body: Center(
@@ -118,7 +122,9 @@ class _DemoState extends State<Demo> {
         itemCount: orginal.length,
         scrollDirection: Axis.vertical,
         onIndexChanged: (value) {
-          addData(list: value);
+          if (widget.isDuplicate) {
+            addData(list: value);
+          }
         },
         itemBuilder: ((context, index) {
           log("check--->${orginal.length}");
